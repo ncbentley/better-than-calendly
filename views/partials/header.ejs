@@ -1,12 +1,26 @@
+<head>
+    <link rel="stylesheet" href="./styles/header.css">
+</head>
+
 <header>
-    <h1>Title</h1>
-    <button>Sign In</button><button>Sign Up</button>
-    <button>Create a Schedule</button>
+    <section class="title">
+        <h1>Title</h1>
+        <h3>Logo</h3>
+    </section>
+    <% if (user) {%>
+        <div id="create">
+            <a href="/schedule/new"><button>Create a Schedule</button></a>
+        </div>
+    <%} else {%>
+        <div id="login">
+            <a href="/login"><button>Sign In</button></a> <a href="/register"><button>Sign Up</button></a>
+        </div>
+    <%}%>
     <nav>
         <ul>
-            <li>View All Schedules</li>
-            <li>View My Schedules</li>
-            <li>View My Appointments</li>
+            <li><a href="/schedules/all">View All Schedules</a></li>
+            <li><a href="/schedules">View My Schedules</a></li>
+            <li><a href="/appointments">View My Appointments</a></li>
         </ul>
     </nav>
 </header>

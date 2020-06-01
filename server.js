@@ -2,6 +2,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 require('dotenv').config();
 
 /* --- Globals ---*/
@@ -15,7 +17,23 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(methodOverride('_method'));
 
-app.set('engine view', 'ejs');
+/* --- Session Config --- */
+app.use(
+    session({
+        store: new MongoStore({
+            url: process.env.DB_URL
+        }),
+        secret: "This is my fancy secret",
+        resave: false,
+        saveUninitialized: false,
+        cookie: {
+            maxAge: 1000 * 60 * 60 * 24 * 7 *2 // two weeks
+        }
+    })
+);
+
+
+app.set('view engine', 'ejs');
 
 // Landing Page
 app.get('/', (req, res) => {

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Better Than Calendly</title>
+</head>
+
+<body>
+    <header>
+        <h1>Schedule</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/appointment">My Appointments</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <!-- schedule edit and delete -->
+        <section>
+            <h2>Schedule Details</h2>
+            <a href="/schedule<%=schedule._id%>/edit">Edit</a>"
+        </section>
+        <form action="/schedule/<%=schedule._id %>?_method=DELETE" method="POST">
+            <input type="submit" value="Delete" />
+        </form>
+    </main>
+</body>
+
+</html>

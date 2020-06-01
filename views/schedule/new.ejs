@@ -5,22 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Better Than Calendly</title>
+    <%- include('../partials/styles') %>
 </head>
 
 <body>
-    <header>
-        <h1>New Schedule</h1>
-        <nav>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/schedule">My Schedule</a></li>
-            </ul>
-        </nav>
-    </header>
+    <%- include('../partials/header') %>
     <main>
         <!-- schedule new -->
-        <form action="/schedule" method="POST">
-            <input type="text" value="name" placeholder="Schedule Details" />
+        <form action="/schedules" method="POST">
+            <input type="text" name="companyName" placeholder="Company Name" />
+            <input type="text" name="scheduleName" placeholder="Schedule Title" />
+            <section>
+                <input type="time" name="openTime" step=3600 placeholder="Open Time" />
+                <input type="time" name="closeTime" step=3600 placeholder="Close Tiem" />
+            </section>
+            <input type="submit" value="Create Schedule" />
         </form>
     </main>
 </body>

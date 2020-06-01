@@ -61,4 +61,9 @@ router.post('/register', async (req, res) => {
     }
 })
 
+router.delete("/logout", async function (req, res) {
+    await req.session.destroy();
+    res.redirect("/login");
+});
+
 module.exports = router;

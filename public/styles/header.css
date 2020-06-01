@@ -44,3 +44,14 @@ header div {
     right: 10px;
     top: 10px;
 }
+
+header div p {
+    text-align: right;
+    margin: 10px;
+}
+
+header div form {
+    padding: 0 10px;
+    display: flex;
+    justify-content: flex-end;
+}

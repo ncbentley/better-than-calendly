@@ -5,7 +5,10 @@ const bcrypt = require('bcrypt');
 const db = require('../models');
 
 router.get('/login', (req, res) => {
-    res.render('auth/login');
+    const context = {
+        user: req.session.currentUser
+    }
+    res.render('auth/login', context);
 });
 
 router.post('/login', async (req, res) => {
@@ -30,7 +33,10 @@ router.post('/login', async (req, res) => {
 })
 
 router.get('/register', (req, res) => {
-    res.render('auth/register');
+    const context = {
+        user: req.session.currentUser
+    }
+    res.render('auth/register', context);
 })
 
 router.post('/register', async (req, res) => {

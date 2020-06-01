@@ -1,0 +1,46 @@
+header {
+    position: relative;
+}
+
+.title {
+    margin: 10px;
+}
+
+h1 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+h3 {
+    text-align: center;
+}
+
+nav ul {
+    text-align: center;
+    list-style-type: none;
+    overflow: hidden;
+}
+
+nav ul li {
+    display: inline;
+}
+
+/* Pipe Separator before all nav items except the first */
+nav ul li + li:before {
+    content: " | ";
+    padding: 0 10px;
+}
+
+nav ul li a {
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    padding: 8px;
+}
+
+header div {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}

@@ -37,7 +37,10 @@ app.set('view engine', 'ejs');
 
 // Landing Page
 app.get('/', (req, res) => {
-    res.render('index');
+    const context = {
+        user: req.session.currentUser
+    };
+    res.render('index', context);
 });
 
 /* --- Controllers ---*/

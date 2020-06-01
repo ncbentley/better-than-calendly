@@ -6,9 +6,16 @@ const db = require("../models");
 // My Schedules - Index
 router.get('/', async (req, res) => {
     try {
-        const mySchedule = await db.Schedule.find({});
-        const context = { schedule: mySchedule };
-        res.render("schedule/index", context);
+        if (req.session.currentUser) {
+            const mySchedule = await db.Schedule.findById(req.session.currentUser._id);
+            const context = { 
+                user: req.session.currentUser,
+                schedule: mySchedule
+            };
+            res.render("schedule/index", context);
+        } else {
+            res.redirect('/login');
+        }
     } catch (err) {
         console.log(err);
         res.send({ message: "Internal Server Error" });

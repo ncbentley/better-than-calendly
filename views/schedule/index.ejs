@@ -17,6 +17,16 @@
             </ul>
         </nav>
     </header>
+    <main>
+        <h2>List of Schedules</h2>
+        <ul>
+            <% schedule.forEach(schedule =>{ %>
+            <li>
+                <a href="/schedule/<%=schedule._id %>"><%= schedule.name %></a>
+            </li>
+            <% }); %>
+        </ul>
+    </main>
 </body>
 
 </html>

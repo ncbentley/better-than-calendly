@@ -1,57 +1,93 @@
 header {
+    --background: #f1f1f1;
+    --sub-background: #1f1f1f;
     position: relative;
+    background: var(--background);
 }
 
-.title {
-    margin: 10px;
-}
-
-h1 {
+header h1 {
     text-align: center;
     font-weight: bold;
     font-size: 24px;
 }
 
-h3 {
+header h3 {
     text-align: center;
 }
 
-nav ul {
+header nav ul {
+    background-color: var(--sub-background);
+    margin: 0px;
     text-align: center;
     list-style-type: none;
     overflow: hidden;
+    color: var(--background);
 }
 
-nav ul li {
+header nav ul li {
     display: inline;
 }
 
 /* Pipe Separator before all nav items except the first */
-nav ul li + li:before {
+header nav ul li + li:before {
     content: " | ";
     padding: 0 10px;
+    background-color: var(--sub-background);
 }
 
-nav ul li a {
+header nav ul li a {
+    color: white;
     display: inline-block;
     text-align: center;
     text-decoration: none;
     padding: 8px;
+    transition-duration: .3s;
 }
 
-header div {
+header nav ul li a:hover {
+    background-color: #2098D1;
+}
+
+header .title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header .title div {
+    margin: 10px;
+    padding: 5px;
+    width: 70%;
+    border: 1px solid var(--sub-background);
+}
+
+header .buttons {
     position: absolute;
     right: 10px;
     top: 10px;
 }
 
-header div p {
+header .buttons p {
     text-align: right;
     margin: 10px;
 }
 
-header div form {
+header .buttons form {
     padding: 0 10px;
     display: flex;
     justify-content: flex-end;
+}
+
+header button, header input[type=submit] {
+    background-color: var(--sub-background);
+    color: var(--background);
+    border: none;
+    padding: 3px 7px;
+    transition-duration: .3s;
+    font-size: 1em;
+}
+
+header button:hover, header input[type=submit]:hover {
+    background-color: #2098D1;
+    cursor: pointer;
 }

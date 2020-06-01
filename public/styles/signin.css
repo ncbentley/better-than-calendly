@@ -1,0 +1,29 @@
+h2 {
+    margin-top: 20px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+form {
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+form input {
+    margin: 10px;
+}
+
+button, input[type=submit] {
+    background-color: #f1f1f1;
+    border: none;
+    padding: 5px 10px;
+    font-size: 1.2em;
+}
+
+button:hover, input[type=submit]:hover {
+    cursor: pointer;
+}

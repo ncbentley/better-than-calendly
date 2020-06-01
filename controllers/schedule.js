@@ -29,26 +29,23 @@ router.get('/all', async (req, res) => {
 
 // New Schedule Route
 router.get('/new', (req, res) => {
-    res.render("schedule/new");
+    const context = {
+        user: req.session.currentUser
+    };
+    res.render("schedule/new", context);
 });
 
 // Create Route - don't think I have the syntax right on this
 router.post('/', async (req, res) => {
-    const schedule = {
-        openTime: req.body.openTime,
-        closeTime: req.body.closeTime,
-        companyName: req.body.companyName,
-        scheduleName: req.body.scheduleName,
-        customSlots: req.body.customSlots,
-    };
-    db.Schedule.create(schedule, (err, createdSchedule) => {
-        if (err) {
-            console.log(err);
-            res.send({ message: "Internal Server Error" });
-        } else {
-            res.redirect("/schedule");
-        }
-    });
+    try {
+        req.body.openTime = req.body.openTime.split(':')[0];
+        req.body.closeTime = req.body.closeTime.split(':')[0];
+        const createdSchedule = await db.Schedule.create(req.body)
+        res.redirect(`/schedules/${createdSchedule._id}`);
+    } catch (error) {
+        console.log(error);
+        res.send({ message: "Internal Server Error" });
+    }
 });
 
 // Show Route
@@ -86,7 +83,7 @@ router.put('/:id', async (req, res) => {
             console.log(err);
             res.send({ message: "Internal Server Error" });
         } else {
-            res.redirect(`/schedule/${updatedSchedule._id}`);
+            res.redirect(`/schedules/${updatedSchedule._id}`);
         }
     });
 });
@@ -98,7 +95,7 @@ router.delete('/:id', async (req, res) => {
         const detetedAppointments = await db.Appointment.remove({
             schedule: deletedSchedule._id,
         });
-        res.redirect("/schedule");
+        res.redirect("/schedules");
     } catch (err) {
         console.log(err)
         res.send({ message: "Internal Server Error" });

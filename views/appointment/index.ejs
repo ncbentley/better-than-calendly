@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <header>
+        <h1>My Appointments</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/schedule">My Schedule</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>List of Appointments</h2>
+        <ul>
+            <% appointment.forEach(appointment =>{ %>
+            <li>
+                <a href="/appointment/<%=appointment._id %>"><%= appointment.name %></a>
+            </li>
+            <% }); %>
+        </ul>
+    </main>
+</body>
+
+</html>

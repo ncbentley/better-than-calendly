@@ -23,9 +23,17 @@
             <% appointment.forEach(appointment =>{ %>
             <li>
                 <a href="/appointment/<%=appointment._id %>"><%= appointment.name %></a>
-            </li>
-            <% }); %>
+
         </ul>
+        <!-- edit link -->
+        <a href="/appointment/<%=appointment[index]._id %>/edit">(edit)</a>
+
+        <!-- delete -->
+        <form action="/appointment/<%=appointment[index]._id%>?_method=DELETE" method="POST">
+            <input type="submit" value="Delete">
+        </form>
+        </li>
+        <% }); %>
     </main>
 </body>
 

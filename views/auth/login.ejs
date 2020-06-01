@@ -6,6 +6,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="./styles/reset.css">
     <link rel="stylesheet" href="./styles/signin.css">
+    <link rel="stylesheet" href="./styles/hover-min.css">
 </head>
 <body>
     <%- include('../partials/header') %>
@@ -13,7 +14,7 @@
     <form action='/login' method='POST'>
         <input type='text' name='username' placeholder='Username' />
         <input type='password' name='password' placeholder='Password' />
-        <input type='submit' value='Log In' />
+        <input type='submit' value='Log In' class="hvr-back-pulse" />
     </form>
 </body>
 </html>

@@ -16,3 +16,14 @@ form {
 form input {
     margin: 10px;
 }
+
+button, input[type=submit] {
+    background-color: #f1f1f1;
+    border: none;
+    padding: 5px 10px;
+    font-size: 1.2em;
+}
+
+button:hover, input[type=submit]:hover {
+    cursor: pointer;
+}

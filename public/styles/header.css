@@ -84,6 +84,7 @@ header button, header input[type=submit] {
     border: none;
     padding: 3px 7px;
     transition-duration: .3s;
+    font-size: 1em;
 }
 
 header button:hover, header input[type=submit]:hover {

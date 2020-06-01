@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Better Than Calendly</title>
+</head>
+
+<body>
+    <header>
+        <h1>Edit Schedule</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/schedule">My Schedule</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <!-- schedule edit -->
+        <!-- .name will likely need to be updated to match models -->
+        <h2>Edit <%=schedule.name %></h2>
+        <form action="/schedule/<%=schedule._id%>?_method=PUT" method="POST">
+            <input type="text" name="name" value="<%=schedule.name %>" />
+        </form>
+    </main>
+</body>
+
+</html>

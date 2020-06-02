@@ -7,7 +7,7 @@ const db = require("../models");
 router.get('/', async (req, res) => {
     try {
         if (req.session.currentUser) {
-            const mySchedule = await db.Schedule.findById(req.session.currentUser._id);
+            const mySchedule = await db.Schedule.find({user: req.session.currentUser._id});
             const context = { 
                 user: req.session.currentUser,
                 schedule: mySchedule
@@ -34,19 +34,23 @@ router.get('/all', async (req, res) => {
     }
 });
 
-// New Schedule Route
+// New Route
 router.get('/new', (req, res) => {
+    // TODO: Insure there is user session
     const context = {
         user: req.session.currentUser
     };
     res.render("schedule/new", context);
 });
 
-// Create Route - don't think I have the syntax right on this
+// Create Route
 router.post('/', async (req, res) => {
     try {
+        // TODO: Insure there is user session
         req.body.openTime = req.body.openTime.split(':')[0];
         req.body.closeTime = req.body.closeTime.split(':')[0];
+        req.body.user = req.session.currentUser.id;
+        console.log(req.body);
         const createdSchedule = await db.Schedule.create(req.body)
         res.redirect(`/schedules/${createdSchedule._id}`);
     } catch (error) {
@@ -57,17 +61,17 @@ router.post('/', async (req, res) => {
 
 // Show Route
 router.get('/:id', async (req, res) => {
-    db.Schedule.findById(req.params.id)
-        .populate("schedule user")
-        .exec(function (err, foundSchedule) {
-            if (err) {
-                console.log(err);
-                res.send({ message: "Internal Server Error" });
-            } else {
-                const context = { schedule: foundSchedule };
-                res.render("schedule/show", context);
-            }
-        });
+    try {
+        const schedule = await db.Schedule.findById(req.params.id).populate("appointments");
+        const context = {
+            schedule: schedule,
+            user: req.session.currentUser
+        };
+        res.render("schedule/show", context);
+    } catch (error) {
+        console.log(error);
+        res.send({ message: "Internal Server Error" });
+    }
 });
 
 // Edit Route

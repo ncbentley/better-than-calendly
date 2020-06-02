@@ -16,57 +16,24 @@ router.get('/', async (req, res) => {
     });
 });
 
-// New Route
-router.get('/new', (req, res) => {
-    db.Schedule.find({}, function (err, allSchedules) {
-        if (err) {
-            console.log(err);
-            res.send({ message: "Internal Server Error" });
-        } else {
-            const context = { schedule: allSchedules };
-            res.render("schedule/new", context);
-        }
-    });
-});
-
 // Create Route
 router.post('/', async (req, res) => {
-    db.Appointment.create(req.body, function (err, createdAppointment) {
-        if (err) {
-            console.log(err);
-            res.send({ message: "Internal Server Error" });
-        } else {
-            db.Schedule.findById(createdAppointment.schedule, function (err, foundSchedule) {
-                if (err) {
-                    res.send({ message: "Internal Server Error" });
-                } else {
-                    foundSchedule.appointment.push(createdAppointment.schedule, function (err, foundSchedule) {
-                        if (err) {
-                            console.log(err);
-                            res.send({ message: "Internal Server Error" });
-                        } else {
-                            foundSchedule.appointment.push(createdAppointment);
-                            foundSchedule.save();
-                            res.redirect("/appointment");
-                        }
-                    });
-                }
-            });
-        }
-    });
+    try {
+        req.body.user = req.session.currentUser.id;
+        const createdAppointment = await db.Appointment.create(req.body);
+        const foundSchedule = await db.Schedule.findById(createdAppointment.schedule);
+        foundSchedule.appointments.push(createdAppointment._id);
+        foundSchedule.save();
+        res.redirect(`/appointments/${createdAppointment._id}`);
+    } catch (error) {
+        console.log(error);
+        res.send({ message: "Internal Server Error" });
+    }
 });
 
 // Show Route
 router.get('/:id', async (req, res) => {
-    (await db.Appointment.findById(req.params.id)).populate("schedule").exec(function (err, foundAppointment) {
-        if (err) {
-            console.log(err);
-            res.send({ message: "Internal Server Error" });
-        } else {
-            const context = { appointment: foundAppointment }
-            res.render("appointment/show", context);
-        }
-    });
+    res.send({message: 'you\'re here'});
 });
 
 // Edit Route

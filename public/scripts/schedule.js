@@ -25,11 +25,42 @@ for (let i = 0; i < 7; i++) {
     }
 }
 
+const appointments = currentSchedule.appointments;
+let baseTime = new Date()
+baseTime.setHours(0)
+baseTime.setMinutes(0)
+baseTime.setSeconds(0)
+baseTime.setMilliseconds(0)
+baseTime = baseTime.getTime();
+appointments.forEach(appointment => {
+    const time = new Date(appointment.time);
+    const difference = time - baseTime;
+    const day = Math.floor(difference / (86400*1000));
+    const hour = (difference / 1000) % 86400 / 3600;
+    $($('.day')[day].children[hour+1]).addClass('taken');
+})
+
+let modal = document.getElementById("myModal");
+
+// Get the <span> element that closes the modal
+let span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
 $('p').click(event => {
-    if (!(event.target.classList.contains('unavailable') || event.target.classList.contains('label'))) {
+    if (!(event.target.classList.contains('unavailable') || event.target.classList.contains('label') || event.target.classList.contains('taken'))) {
         for (let i = 0; i < 7; i++) {
             if (event.target.parentNode === $('.day')[i]) {
-                const day = days[i];
                 let hour = -1;
                 for (let j = 1; j < 25; j++) { 
                     if (event.target.parentNode.children[j] === event.target) {
@@ -45,11 +76,13 @@ $('p').click(event => {
                 date.setMinutes(0);
                 date.setSeconds(0);
                 date.setMilliseconds(0);
-                console.log(date);
-
-                break;
+                $('#schedule')[0].value = currentSchedule._id;
+                $('#time')[0].value = date.toString();
+                modal.style.display = "block";
             }
         }
     }
-})
+});
+
+
 

@@ -62,7 +62,7 @@ router.post('/', async (req, res) => {
 // Show Route
 router.get('/:id', async (req, res) => {
     try {
-        const schedule = await db.Schedule.findById(req.params.id).populate("appointment");
+        const schedule = await db.Schedule.findById(req.params.id).populate("appointments");
         const context = {
             schedule: schedule,
             user: req.session.currentUser

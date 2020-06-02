@@ -13,6 +13,22 @@
 <body>
     <%- include('../partials/header') %>
     <main>
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <form action="/appointments" method="POST">
+                    <input id="schedule" type="text" name="schedule" hidden />
+                    <input id="time" type="text" name="time" hidden />
+                    <input type="text" placeholder="Name" name="name" />
+                    <input type="text" placeholder="Message" name="message" />
+                    <input type="submit" value="New Appointment" />
+                </form>
+            </div>
+        
+        </div>
         <div class="container">
             <section class="labels">
                 <p></p>

@@ -5,15 +5,29 @@ const db = require("../models");
 
 // Index Route
 router.get('/', async (req, res) => {
-    db.Appointment.find({}, function (err, allAppointments) {
-        if (err) {
-            console.log(err);
-            res.send({ message: "Internal Server Error" });
+    try {
+        if (req.session.currentUser) {
+            let appointments = await db.Appointment.find({user: req.session.currentUser.id})
+            const schedules = await db.Schedule.find({user: req.session.currentUser.id}).populate('appointments');
+            schedules.forEach(schedule => {
+                schedule.appointments.forEach(appointment => {
+                    if (appointment.user != req.session.currentUser.id) {
+                        appointments.push(appointment);
+                    }
+                })
+            });
+            const context = {
+                appointment: appointments,
+                user: req.session.currentUser
+            }
+            res.render('appointment/index', context);
         } else {
-            const context = { appointment: allAppointments }
-            res.render("appointment/index", context);
+            res.redirect('/login');
         }
-    });
+    } catch (error) {
+        console.log(error);
+        res.send({message: "Internal Server Error"});
+    }
 });
 
 // Create Route

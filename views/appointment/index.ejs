@@ -5,35 +5,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <%- include('../partials/styles') %>
+    <link rel="stylesheet" href="../styles/appointment.css">
+    <script src="../scripts/appointment.js" defer></script>
 </head>
 
 <body>
-    <header>
-        <h1>My Appointments</h1>
-        <nav>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/schedule">My Schedule</a></li>
-            </ul>
-        </nav>
-    </header>
+    <%- include('../partials/header') %>
     <main>
-        <h2>List of Appointments</h2>
         <ul>
             <% appointment.forEach(appointment =>{ %>
-            <li>
-                <a href="/appointment/<%=appointment._id %>"><%= appointment.name %></a>
-
+            <li id="<%=appointment._id%>">
+                <section class="description">
+                    <h1><%=appointment.name%></h1>
+                    <p><%=appointment.message%></p>
+                </section>
+                <section class="links">
+                    <% if (appointment.user == user.id) {%>
+                    <!-- edit link -->
+                    <a href="/appointment/<%=appointment._id %>/edit">(edit)</a>
+                                    
+                    <!-- delete -->
+                    <form action="/appointment/<%=appointment._id%>?_method=DELETE" method="POST">
+                        <input type="submit" value="Delete">
+                    </form>
+                <%}%>
+                </section>
+            </li>
+            <% }); %>
         </ul>
-        <!-- edit link -->
-        <a href="/appointment/<%=appointment[index]._id %>/edit">(edit)</a>
-
-        <!-- delete -->
-        <form action="/appointment/<%=appointment[index]._id%>?_method=DELETE" method="POST">
-            <input type="submit" value="Delete">
-        </form>
-        </li>
-        <% }); %>
     </main>
 </body>
 

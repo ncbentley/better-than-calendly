@@ -47,7 +47,17 @@ router.post('/', async (req, res) => {
 
 // Show Route
 router.get('/:id', async (req, res) => {
-    res.send({message: 'you\'re here'});
+    try {
+        const appointment = await db.Appointment.findById(req.params.id).populate('schedule');
+        const context = {
+            appointment: appointment,
+            user: req.session.currentUser
+        }
+        res.render('appointment/show', context);
+    } catch (error) {
+        console.log(error);
+        res.send({message: "Internal Server Error"});
+    }
 });
 
 // Edit Route

@@ -49,7 +49,8 @@ router.post('/', async (req, res) => {
         // TODO: Insure there is user session
         req.body.openTime = req.body.openTime.split(':')[0];
         req.body.closeTime = req.body.closeTime.split(':')[0];
-        req.body.user = req.session.currentUser._id;
+        req.body.user = req.session.currentUser.id;
+        console.log(req.body);
         const createdSchedule = await db.Schedule.create(req.body)
         res.redirect(`/schedules/${createdSchedule._id}`);
     } catch (error) {
@@ -61,7 +62,7 @@ router.post('/', async (req, res) => {
 // Show Route
 router.get('/:id', async (req, res) => {
     try {
-        const schedule = await db.Schedule.findById(req.params.id).populate("user appointment");
+        const schedule = await db.Schedule.findById(req.params.id).populate("appointment");
         const context = {
             schedule: schedule,
             user: req.session.currentUser

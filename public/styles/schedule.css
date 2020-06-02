@@ -1,3 +1,7 @@
+* {
+    --unavailable: #3f3f3f;
+}
+
 body {
     height: 100vh;
     display: flex;
@@ -21,23 +25,43 @@ main {
 }
 
 section {
-    background-color: red;
     flex: 1;
     display: flex;
     flex-direction: column;
 }
 
 p {
-    background-color: orange;
-    border: 1px solid black;
+    background-color: green;
     flex: 1;
+    transition-duration: .3s;
+}
+
+p:hover {
+    background-color: lightgreen;
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+p.label {
+    background-color: white;
+}
+
+p.label:hover, p.unavailable:hover {
+    transform: scale(1.0);
+    cursor: default;
 }
 
 .labels p {
+    line-height: 20px;
     text-align: right;
     padding: 0 3px;
 }
 
 .day p {
+    border: 1px solid black;
     text-align: center;
+}
+
+p.unavailable {
+    background-color: var(--unavailable);
 }

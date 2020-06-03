@@ -24,6 +24,10 @@ header nav ul {
     color: var(--background);
 }
 
+header button {
+    margin: 10px
+}
+
 header nav ul li {
     display: inline;
 }

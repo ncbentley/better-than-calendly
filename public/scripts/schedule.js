@@ -59,9 +59,11 @@ appointments.forEach(appointment => {
 customs.forEach(custom => {
     const time = new Date(custom);
     const difference = time - baseTime;
-    const day = Math.floor(difference / (86400*1000));
-    const hour = (difference / 1000) % 86400 / 3600;
-    $($('.day')[day].children[hour+1]).toggleClass('unavailable');
+    if (difference > 0 && difference < (86400*1000*7)) {
+        const day = Math.floor(difference / (86400*1000));
+        const hour = (difference / 1000) % 86400 / 3600;
+        $($('.day')[day].children[hour+1]).toggleClass('unavailable');
+    }
 });
 
 let modal = document.getElementById("myModal");

@@ -83,7 +83,7 @@ router.get('/:id/edit', async (req, res) => {
         let schedule = await db.Schedule.findById(req.params.id).populate('appointments');
         schedule.openTimeString = `${schedule.openTime}`.padStart(2, '0');
         schedule.closeTimeString = `${schedule.closeTime}`.padStart(2, '0');
-        const context = { 
+        const context = {
             schedule: schedule,
             user: req.session.currentUser,
             customTimes: [`${schedule.openTime}`.padStart(2, '0'), `${schedule.closeTime}`.padStart(2, '0')]

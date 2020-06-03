@@ -38,7 +38,7 @@ router.post('/', async (req, res) => {
         const foundSchedule = await db.Schedule.findById(createdAppointment.schedule);
         foundSchedule.appointments.push(createdAppointment._id);
         foundSchedule.save();
-        res.redirect(`/appointment/${createdAppointment._id}`);
+        res.redirect(`/appointments/${createdAppointment._id}`);
     } catch (error) {
         console.log(error);
         res.send({ message: "Internal Server Error" });
@@ -80,7 +80,7 @@ router.put('/:id', async (req, res) => {
             console.log(err);
             res.send({ message: "Internal Server Error" });
         } else {
-            res.redirect(`/appointment/${updatedAppointment._id}`);
+            res.redirect(`/appointments/${updatedAppointment._id}`);
         }
     });
 });
@@ -99,7 +99,7 @@ router.delete('/:id', async (req, res) => {
                 } else {
                     foundSchedule.appointment.remove(deletedAppointment);
                     foundSchedule.save();
-                    res.redirect('/appointment');
+                    res.redirect('/appointments');
                 }
             });
         }

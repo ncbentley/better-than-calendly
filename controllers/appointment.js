@@ -64,6 +64,7 @@ router.get('/:id/edit', async (req, res) => {
             appointment: appointment,
             user: req.session.currentUser
         };
+        res.render("appointments/edit", context);
     } catch (error) {
         console.log(error);
         res.send({ message: "Internal Server Error" });

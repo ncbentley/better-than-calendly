@@ -5,23 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Better Than Calendly</title>
+    <%- include('../partials/styles') %>
+    <link rel="stylesheet" href="../styles/appointment.css">
 </head>
 
 <body>
-    <header>
-        <h1>Appointment</h1>
-        <nav>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/schedule">My Schedule</a></li>
-            </ul>
-        </nav>
-    </header>
+    <%- include ('../partials/header') %>
     <main>
-        <!-- appointment edit and delete -->
+        <p>Company Name: <%= appointment.schedule.companyName %></p>
+        <p>Schedule Name: <%= appointment.schedule.scheduleName %></p>
+        <p>Your Name: <%= appointment.name %></p>
+        <p>Your Message: <%= appointment.message %></p>
+        <p>Date/Time: <%= appointment.time %></p>
         <section>
-            <h2>Appointment Details</h2>
-            <a href="/appointment<%=appointment._id%>/edit">Edit</a>"
+            <a href="/appointment<%=appointment._id%>/edit">Edit</a>
         </section>
         <form action="/appointment/<%=appointment._id %>?_method=DELETE" method="POST">
             <input type="submit" value="Delete" />

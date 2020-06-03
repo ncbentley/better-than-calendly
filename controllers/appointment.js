@@ -64,7 +64,7 @@ router.get('/:id/edit', async (req, res) => {
             appointment: appointment,
             user: req.session.currentUser
         };
-        res.render("appointments/edit", context);
+        res.render("appointment/edit", context);
     } catch (error) {
         console.log(error);
         res.send({ message: "Internal Server Error" });
@@ -75,7 +75,7 @@ router.get('/:id/edit', async (req, res) => {
 router.put('/:id', async (req, res) => {
     try {
         const appointment = await db.Appointment.findByIdAndUpdate(req.params.id, req.body, {new: true});
-        res.redirect(`/appointments/${updatedAppointment._id}`);
+        res.redirect(`/appointments/${appointment._id}`);
     }
     catch (error) {
         console.log(error);

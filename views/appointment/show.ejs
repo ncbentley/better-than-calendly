@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Better Than Calendly</title>
+    <title>Appointments</title>
     <%- include('../partials/styles') %>
     <link rel="stylesheet" href="../styles/appointment.css">
 </head>
@@ -18,12 +18,12 @@
         <p>Your Message: <%= appointment.message %></p>
         <p>Date/Time: <%= appointment.time %></p>
         <% if (user.id == appointment.user) {%>
-            <section>
-                <a href="/appointment<%=appointment._id%>/edit">Edit</a>
-            </section>
-            <form action="/appointment/<%=appointment._id %>?_method=DELETE" method="POST">
-                <input type="submit" value="Delete" />
-            </form>
+        <section>
+            <a href="/appointment<%=appointment._id%>/edit">Edit</a>
+        </section>
+        <form action="/appointment/<%=appointment._id %>?_method=DELETE" method="POST">
+            <input type="submit" value="Delete" />
+        </form>
         <%}%>
     </main>
 </body>

@@ -79,27 +79,29 @@ router.get('/:id', async (req, res) => {
 
 // Edit Route
 router.get('/:id/edit', async (req, res) => {
-    db.Schedule.findById(req.params.id, function (err, foundSchedule) {
-        if (err) {
-            console.log(err);
-            res.send({ message: "Internal Server Error" });
-        } else {
-            const context = { schedule: foundSchedule };
-            res.render("schedule/edit", context);
-        }
-    });
+    try {
+        let schedule = await db.Schedule.findById(req.params.id).populate('appointments');
+        schedule.openTimeString = `${schedule.openTime}`.padStart(2, '0');
+        schedule.closeTimeString = `${schedule.closeTime}`.padStart(2, '0');
+        const context = { 
+            schedule: schedule,
+            user: req.session.currentUser,
+            customTimes: [`${schedule.openTime}`.padStart(2, '0'), `${schedule.closeTime}`.padStart(2, '0')]
+        };
+        res.render("schedule/edit", context);
+    } catch (error) {
+        console.log(error);
+        res.send({ message: "Internal Server Error" });
+    }
 });
 
 // Update Route
 router.put('/:id', async (req, res) => {
-    db.Schedule.findByIdAndUpdate(req.params.id, req.body, { new: true }, function (err, updatedSchedule) {
-        if (err) {
-            console.log(err);
-            res.send({ message: "Internal Server Error" });
-        } else {
-            res.redirect(`/schedules/${updatedSchedule._id}`);
-        }
-    });
+    req.body.openTime = req.body.openTime.split(':')[0];
+    req.body.closeTime = req.body.closeTime.split(':')[0];
+    console.log(req.body);
+    const updatedSchedule = await db.Schedule.findByIdAndUpdate(req.params.id, req.body);
+    res.redirect(`/schedules/${req.params.id}/edit`);
 });
 
 // Delete Route

@@ -12,7 +12,7 @@ body {
 main {
     flex: 1 1 auto;
     height: 100%;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
 
@@ -129,4 +129,41 @@ p.taken {
     color: #000;
     text-decoration: none;
     cursor: pointer;
+}
+
+.button-div {
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-div div {
+    flex: 1 1 auto;
+    background-color: #f1f1f1;
+    width: 100px;
+    vertical-align: middle;
+    position: relative;
+    transition-duration: .3s;
+}
+
+.next, .previous {
+    transition-duration: .3s;
+    position: absolute;
+    top: 50%;
+    margin-top: -8px;
+    width: 100px;
+    text-align: center;
+    display: inline-block;
+    transform: rotate(90deg);
+}
+
+.button-div div:hover {
+    background-color: #1f1f1f;
+    cursor: pointer;
+}
+
+.button-div div:hover span {
+    color: white;
 }

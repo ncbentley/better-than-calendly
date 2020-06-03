@@ -18,13 +18,13 @@
             <% schedule.forEach(schedule =>{ %>
             <li id="<%=schedule._id%>">
                 <section class="description">
-                    <h1>Company Name: <%=schedule.companyName%></h1>
+                    <h1><%=schedule.companyName%></h1>
                     <p>Schedule Name: <%=schedule.scheduleName%></p>
                     <p>Open Time: <%=schedule.openTime%>:00</p>
                     <p>Close Time: <%=schedule.closeTime%>:00</p>
                 </section>
+                <% if (schedule.user == user.id) {%>
                 <section class="links">
-                    <% if (schedule.user == user.id) {%>
                     <!-- edit link -->
                     <a href="/schedules/<%=schedule._id %>/edit">(edit)</a>
 
@@ -32,10 +32,10 @@
                     <form action="/schedules/<%=schedule._id%>?_method=DELETE" method="POST">
                         <input type="submit" value="Delete">
                     </form>
-                    <%}%>
-                    </section>
-                </li>
-                <% }); %>
+                </section>
+                <%}%>
+            </li>
+            <% }); %>
         </ul>
     </main>
 </body>

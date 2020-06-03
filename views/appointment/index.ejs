@@ -20,8 +20,8 @@
                     <h1><%=appointment.name%></h1>
                     <p><%=appointment.message%></p>
                 </section>
+                <% if (appointment.user == user.id) {%>
                 <section class="links">
-                    <% if (appointment.user == user.id) {%>
                     <!-- edit link -->
                     <a href="/appointment/<%=appointment._id %>/edit">(edit)</a>
                                     
@@ -29,8 +29,8 @@
                     <form action="/appointment/<%=appointment._id%>?_method=DELETE" method="POST">
                         <input type="submit" value="Delete">
                     </form>
-                <%}%>
                 </section>
+                <%}%>
             </li>
             <% }); %>
         </ul>

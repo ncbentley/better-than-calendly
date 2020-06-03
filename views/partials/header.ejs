@@ -1,7 +1,6 @@
 <head>
     <!-- ./ works in some places ../ in others -->
-    <link rel="stylesheet" href="./styles/header.css">
-    <link rel="stylesheet" href="../styles/header.css">
+    <link rel="stylesheet" href="/styles/header.css">
 </head>
 
 <header>
@@ -14,7 +13,7 @@
     <% if (user) {%>
         <div class="buttons" id="create">
             <form action='/logout?_method=DELETE' method='POST'><input type='submit' value='Logout'/></form>
-            <p><a href="/schedules/new"><button>Create a schedule</button></a></p>
+            <a href="/schedules/new"><button>Create a schedule</button></a>
         </div>
     <%} else {%>
         <div class="buttons" id="login">

@@ -5,7 +5,7 @@ h2 {
     font-size: 24px;
 }
 
-form {
+main form {
     margin: 10px;
     display: flex;
     justify-content: center;
@@ -13,17 +13,17 @@ form {
     flex-direction: column;
 }
 
-form input {
+main form input {
     margin: 10px;
 }
 
-button, input[type=submit] {
+main button, main input[type=submit] {
     background-color: #f1f1f1;
     border: none;
     padding: 5px 10px;
     font-size: 1.2em;
 }
 
-button:hover, input[type=submit]:hover {
+main button:hover, main input[type=submit]:hover {
     cursor: pointer;
 }

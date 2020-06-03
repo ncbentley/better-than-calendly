@@ -41,7 +41,6 @@ router.get('/all', async (req, res) => {
 
 // New Route
 router.get('/new', (req, res) => {
-    // TODO: Insure there is user session
     const context = {
         user: req.session.currentUser
     };
@@ -51,7 +50,6 @@ router.get('/new', (req, res) => {
 // Create Route
 router.post('/', async (req, res) => {
     try {
-        // TODO: Insure there is user session
         req.body.openTime = req.body.openTime.split(':')[0];
         req.body.closeTime = req.body.closeTime.split(':')[0];
         req.body.user = req.session.currentUser.id;

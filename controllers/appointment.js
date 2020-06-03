@@ -7,8 +7,8 @@ const db = require("../models");
 router.get('/', async (req, res) => {
     try {
         if (req.session.currentUser) {
-            let appointments = await db.Appointment.find({user: req.session.currentUser.id})
-            const schedules = await db.Schedule.find({user: req.session.currentUser.id}).populate('appointments');
+            let appointments = await db.Appointment.find({ user: req.session.currentUser.id })
+            const schedules = await db.Schedule.find({ user: req.session.currentUser.id }).populate('appointments');
             schedules.forEach(schedule => {
                 schedule.appointments.forEach(appointment => {
                     if (appointment.user != req.session.currentUser.id) {
@@ -26,7 +26,7 @@ router.get('/', async (req, res) => {
         }
     } catch (error) {
         console.log(error);
-        res.send({message: "Internal Server Error"});
+        res.send({ message: "Internal Server Error" });
     }
 });
 
@@ -56,7 +56,7 @@ router.get('/:id', async (req, res) => {
         res.render('appointment/show', context);
     } catch (error) {
         console.log(error);
-        res.send({message: "Internal Server Error"});
+        res.send({ message: "Internal Server Error" });
     }
 });
 
@@ -80,7 +80,7 @@ router.put('/:id', async (req, res) => {
             console.log(err);
             res.send({ message: "Internal Server Error" });
         } else {
-            res.redirect(`/appointment/${updatedAppointment._id}`);
+            res.redirect(`/appointments/${updatedAppointment._id}`);
         }
     });
 });
@@ -99,7 +99,7 @@ router.delete('/:id', async (req, res) => {
                 } else {
                     foundSchedule.appointment.remove(deletedAppointment);
                     foundSchedule.save();
-                    res.redirect('/appointment');
+                    res.redirect('/appointments');
                 }
             });
         }

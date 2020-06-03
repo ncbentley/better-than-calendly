@@ -87,23 +87,17 @@ router.put('/:id', async (req, res) => {
 
 // Delete Route
 router.delete('/:id', async (req, res) => {
-    db.Appointment.findByIdAndDelete(req.params.id, function (err, deletedAppointment) {
-        if (err) {
-            console.log(err);
-            res.send({ message: "Internal Server Error" });
-        } else {
-            db.Appointment.findById(deletedAppointment.schedule, function (err, foundAppointment) {
-                if (err) {
-                    console.log(err);
-                    res.send({ message: "Internal Server Error" });
-                } else {
-                    foundSchedule.appointment.remove(deletedAppointment);
-                    foundSchedule.save();
-                    res.redirect('/appointments');
-                }
-            });
-        }
-    });
+    try {
+        const appointment = await db.Appointment.findByIdAndDelete(req.params.id);
+        const schedule = await db.Schedule.findById(appointment.schedule);
+        schedule.appointments.remove(appointment);
+        schedule.save();
+        res.redirect('/appointments');
+    }
+    catch (error) {
+        console.log(error);
+        res.send({message: "Internal Server Error" });
+    }
 });
 
 module.exports = router;

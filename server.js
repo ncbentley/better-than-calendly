@@ -36,9 +36,18 @@ app.use(
 app.set('view engine', 'ejs');
 
 // Landing Page
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
+    const schedules = await db.Schedule.find({});
+    let list = [];
+    schedules.forEach((schedule, i) => {
+        // Load the first 5
+        if (i < 5) {
+            list.push(schedule);
+        }
+    })
     const context = {
-        user: req.session.currentUser
+        user: req.session.currentUser,
+        schedule: list
     };
     res.render('index', context);
 });

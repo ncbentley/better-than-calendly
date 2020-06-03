@@ -24,10 +24,6 @@ h1 {
     flex-grow: 4;
 }
 
-.description:hover {
-    cursor: pointer;
-}
-
 .links {
     display: flex;
     flex-direction: column;

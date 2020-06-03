@@ -87,7 +87,7 @@ $('p').click(event => {
                 date.setMilliseconds(0);
                 $('#schedule')[0].value = currentSchedule._id;
                 $('#time')[0].value = date.toString();
-                modal.style.display = "block";
+                modal.style.display = "flex";
             }
         }
     }

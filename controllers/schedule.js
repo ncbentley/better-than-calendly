@@ -6,18 +6,14 @@ const db = require("../models");
 // My Schedules - Index
 router.get('/', async (req, res) => {
     try {
-        if (req.session.currentUser) {
-            const mySchedule = await db.Schedule.find({ user: req.session.currentUser.id });
-            const context = {
-                user: req.session.currentUser,
-                schedule: mySchedule
-            };
-            res.render("schedule/index", context);
-        } else {
-            res.redirect('/login');
-        }
-    } catch (err) {
-        console.log(err);
+        const mySchedule = await db.Schedule.find({ user: req.session.currentUser.id });
+        const context = {
+            user: req.session.currentUser,
+            schedule: mySchedule
+        };
+        res.render("schedule/index", context);
+    } catch (error) {
+        console.log(error);
         res.send({ message: "Internal Server Error" });
     }
 });
@@ -25,16 +21,14 @@ router.get('/', async (req, res) => {
 // All Schedules - Index
 router.get('/all', async (req, res) => {
     try {
-        if (req.session.currentUser) {
-            const allSchedules = await db.Schedule.find({});
-            const context = {
-                user: req.session.currentUser,
-                schedule: allSchedules
-            };
-            res.render("schedule/index", context);
+        const allSchedules = await db.Schedule.find({});
+        const context = {
+            user: req.session.currentUser,
+            schedule: allSchedules
         };
-    } catch (err) {
-        console.log(err);
+        res.render("schedule/index", context);
+    } catch (error) {
+        console.log(error);
         res.send({ message: "Internal Server Error" });
     }
 });
@@ -99,9 +93,8 @@ router.get('/:id/edit', async (req, res) => {
 router.put('/:id', async (req, res) => {
     req.body.openTime = req.body.openTime.split(':')[0];
     req.body.closeTime = req.body.closeTime.split(':')[0];
-    console.log(req.body);
     const updatedSchedule = await db.Schedule.findByIdAndUpdate(req.params.id, req.body);
-    res.redirect(`/schedules/${req.params.id}/edit`);
+    res.redirect(`/schedules/${req.params.id}`);
 });
 
 // Delete Route

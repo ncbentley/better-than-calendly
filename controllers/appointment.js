@@ -6,24 +6,20 @@ const db = require("../models");
 // Index Route
 router.get('/', async (req, res) => {
     try {
-        if (req.session.currentUser) {
-            let appointments = await db.Appointment.find({ user: req.session.currentUser.id })
-            const schedules = await db.Schedule.find({ user: req.session.currentUser.id }).populate('appointments');
-            schedules.forEach(schedule => {
-                schedule.appointments.forEach(appointment => {
-                    if (appointment.user != req.session.currentUser.id) {
-                        appointments.push(appointment);
-                    }
-                })
-            });
-            const context = {
-                appointment: appointments,
-                user: req.session.currentUser
-            }
-            res.render('appointment/index', context);
-        } else {
-            res.redirect('/login');
+        let appointments = await db.Appointment.find({ user: req.session.currentUser.id })
+        const schedules = await db.Schedule.find({ user: req.session.currentUser.id }).populate('appointments');
+        schedules.forEach(schedule => {
+            schedule.appointments.forEach(appointment => {
+                if (appointment.user != req.session.currentUser.id) {
+                    appointments.push(appointment);
+                }
+            })
+        });
+        const context = {
+            appointment: appointments,
+            user: req.session.currentUser
         }
+        res.render('appointment/index', context);
     } catch (error) {
         console.log(error);
         res.send({ message: "Internal Server Error" });
@@ -63,10 +59,10 @@ router.get('/:id', async (req, res) => {
 // Edit Route
 router.get('/:id/edit', async (req, res) => {
     try {
-        let appointment = await db.appointment.findById(req.params.id);
+        const appointment = await db.Appointment.findById(req.params.id);
         const context = {
             appointment: appointment,
-            user: req.session.currentUser,
+            user: req.session.currentUser
         };
         res.render("appointments/edit", context);
     } catch (error) {
@@ -77,35 +73,29 @@ router.get('/:id/edit', async (req, res) => {
 
 // Update Route
 router.put('/:id', async (req, res) => {
-    db.Appointment.findByIdAndUpdate(req.params.id, req.body, { new: true }, function (err, updatedAppointment) {
-        if (err) {
-            console.log(err);
-            res.send({ message: "Internal Server Error" });
-        } else {
-            res.redirect(`/appointments/${updatedAppointment._id}`);
-        }
-    });
+    try {
+        const appointment = await db.Appointment.findByIdAndUpdate(req.params.id, req.body, {new: true});
+        res.redirect(`/appointments/${updatedAppointment._id}`);
+    }
+    catch (error) {
+        console.log(error);
+        res.send({ message: "Internal Server Error" });
+    }
 });
 
 // Delete Route
 router.delete('/:id', async (req, res) => {
-    db.Appointment.findByIdAndDelete(req.params.id, function (err, deletedAppointment) {
-        if (err) {
-            console.log(err);
-            res.send({ message: "Internal Server Error" });
-        } else {
-            db.Appointment.findById(deletedAppointment.schedule, function (err, foundAppointment) {
-                if (err) {
-                    console.log(err);
-                    res.send({ message: "Internal Server Error" });
-                } else {
-                    foundSchedule.appointment.remove(deletedAppointment);
-                    foundSchedule.save();
-                    res.redirect('/appointments');
-                }
-            });
-        }
-    });
+    try {
+        const appointment = await db.Appointment.findByIdAndDelete(req.params.id);
+        const schedule = await db.Schedule.findById(appointment.schedule);
+        schedule.appointments.remove(appointment);
+        schedule.save();
+        res.redirect('/appointments');
+    }
+    catch (error) {
+        console.log(error);
+        res.send({message: "Internal Server Error" });
+    }
 });
 
 module.exports = router;

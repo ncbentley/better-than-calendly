@@ -11,6 +11,7 @@ const app = express();
 const PORT = process.env.PORT;
 const controllers = require('./controllers');
 const db = require('./models');
+const authRequired = require('./middlewares/authRequired');
 
 /* --- Middleware ---*/
 app.use(express.static(__dirname + '/public'));
@@ -58,10 +59,10 @@ app.get('/', async (req, res) => {
 app.use('/', controllers.auth);
 
 // Schedules
-app.use('/schedules', controllers.schedule);
+app.use('/schedules', authRequired, controllers.schedule);
 
 // Appointments
-app.use('/appointments', controllers.appointment);
+app.use('/appointments', authRequired, controllers.appointment);
 
 app.listen(PORT, () => {
     console.log(`Server listening at https://localhost:${PORT}`);

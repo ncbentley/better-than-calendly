@@ -95,3 +95,7 @@ header button:hover, header input[type=submit]:hover {
     background-color: #2098D1;
     cursor: pointer;
 }
+
+.title:hover {
+    cursor: pointer;
+}

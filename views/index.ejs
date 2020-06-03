@@ -22,7 +22,7 @@
                     <p>Open Time: <%=schedule.openTime%>:00</p>
                     <p>Close Time: <%=schedule.closeTime%>:00</p>
                 </section>
-                <% if (schedule.user == user.id) {%>
+                <% if (user && schedule.user == user.id) {%>
                 <section class="links">
                     <!-- edit link -->
                     <a href="/schedules/<%=schedule._id %>/edit">(edit)</a>

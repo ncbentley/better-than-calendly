@@ -7,8 +7,8 @@ const db = require("../models");
 router.get('/', async (req, res) => {
     try {
         if (req.session.currentUser) {
-            const mySchedule = await db.Schedule.find({user: req.session.currentUser._id});
-            const context = { 
+            const mySchedule = await db.Schedule.find({ user: req.session.currentUser._id });
+            const context = {
                 user: req.session.currentUser,
                 schedule: mySchedule
             };
@@ -25,9 +25,14 @@ router.get('/', async (req, res) => {
 // All Schedules - Index
 router.get('/all', async (req, res) => {
     try {
-        const allSchedules = await db.Schedule.find({});
-        const context = { schedule: allSchedules };
-        res.render("schedule/index", context);
+        if (req.session.currentUser) {
+            const allSchedules = await db.Schedule.find({});
+            const context = {
+                user: req.session.currentUser,
+                schedule: allSchedules
+            };
+            res.render("schedule/index", context);
+        };
     } catch (err) {
         console.log(err);
         res.send({ message: "Internal Server Error" });

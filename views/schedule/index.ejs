@@ -4,12 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Home</title>
+    <%- include('../partials/styles') %>
+    <link rel="stylesheet" href="../styles/schedule-show.css">
+    <script src="../scripts/schedule.js" defer></script>
 </head>
 
 <body>
+    <%- include('../partials/header') %>
     <header>
-        <h1>My Schedule</h1>
+        <h1>Schedule</h1>
         <nav>
             <ul>
                 <li><a href="/">Home</a></li>
@@ -18,13 +22,28 @@
         </nav>
     </header>
     <main>
-        <h2>List of Schedules</h2>
         <ul>
             <% schedule.forEach(schedule =>{ %>
-            <li>
-                <a href="/schedule/<%=schedule._id %>"><%= schedule.name %></a>
-            </li>
-            <% }); %>
+            <li id="<%=schedule._id%>">
+                <section class="description">
+                    <h1>Company Name: <%=schedule.companyName%></h1>
+                    <p>Schedule Name: <%=schedule.scheduleName%></p>
+                    <p>Open Time: <%=schedule.openTime%>:00</p>
+                    <p>Close Time: <%=schedule.closeTime%>:00</p>
+                </section>
+                <section class="links">
+                    <% if (schedule.user == user.id) {%>
+                    <!-- edit link -->
+                    <a href="/schedule/<%=schedule._id %>/edit">(edit)</a>
+
+                    <!-- delete -->
+                    <form action="/schedule/<%=schedule._id%>?_method=DELETE" method="POST">
+                        <input type="submit" value="Delete">
+                    </form>
+                    <%}%>
+                    </section>
+                </li>
+                <% }); %>
         </ul>
     </main>
 </body>

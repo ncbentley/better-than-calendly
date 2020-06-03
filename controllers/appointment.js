@@ -44,7 +44,7 @@ router.post('/', async (req, res) => {
 // Show Route
 router.get('/:id', async (req, res) => {
     try {
-        const appointment = await db.Appointment.findById(req.params.id).populate('schedule');
+        const appointment = await db.Appointment.findById(req.params.id).populate('user schedule');
         const context = {
             appointment: appointment,
             user: req.session.currentUser

@@ -7,7 +7,7 @@ const db = require("../models");
 router.get('/', async (req, res) => {
     try {
         if (req.session.currentUser) {
-            const mySchedule = await db.Schedule.find({ user: req.session.currentUser._id });
+            const mySchedule = await db.Schedule.find({ user: req.session.currentUser.id });
             const context = {
                 user: req.session.currentUser,
                 schedule: mySchedule

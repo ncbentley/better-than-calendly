@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Better Than Calendly</title>
     <%- include('../partials/styles') %>
+    <link rel="stylesheet" href="/styles/signin.css">
 </head>
 
 <body>
@@ -16,10 +17,12 @@
             <input type="text" name="companyName" placeholder="Company Name" />
             <input type="text" name="scheduleName" placeholder="Schedule Title" />
             <section>
-                <input type="time" name="openTime" step=3600 placeholder="Open Time" />
-                <input type="time" name="closeTime" step=3600 placeholder="Close Tiem" />
+                Open Time: <input type="time" name="openTime" step=3600 />
             </section>
-            <input type="submit" value="Create Schedule" />
+            <section>
+                Close Time: <input type="time" name="closeTime" step=3600 />
+            </section>
+            <input type="submit" value="Create Schedule" class="hvr-back-pulse"/>
         </form>
     </main>
 </body>

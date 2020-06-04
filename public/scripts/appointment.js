@@ -72,17 +72,26 @@ $('.button-div div').click(event => {
     window.location.href = `/appointments/?week=${week}`;
 })
 
-$(".list")[0].style.display = "flex";
-
-
 $(".switch").click(event => {
     if ($(event.target)[0] === $("input[type=checkbox]")[0]) {
         if (event.target.checked) {
             $(".list")[0].style.display = "none";
             $(".schedule")[0].style.display = "flex";
+            $('main').addClass('schedule-view')
+        } else {
+            $(".list")[0].style.display = "flex";
+            $(".schedule")[0].style.display = "none";
+            $('main').removeClass('schedule-view')
         }
+    }
+})
+
+setTimeout(() => {
+    if ($('input[type=checkbox]').prop('checked')) {
+        $(".list")[0].style.display = "none";
+        $(".schedule")[0].style.display = "flex";
     } else {
         $(".list")[0].style.display = "flex";
         $(".schedule")[0].style.display = "none";
     }
-})
+}, 500)

@@ -18,7 +18,7 @@
         <p>Your Name: <%= appointment.name %></p>
         <p>Your Message: <%= appointment.message %></p>
         <p>Date/Time: <%= appointment.time %></p>
-        <% if (user.id == appointment.user) {%>
+        <% if (user.id == appointment.user._id) {%>
             <section>
                 <a href="/appointments/<%=appointment._id%>/edit">Edit</a>
             </section>

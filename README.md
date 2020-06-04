@@ -7,6 +7,9 @@ Schedules are fully customizable to set available/unavailable times.
 <!-- Built With -->
 
 JQuery
+Node.js
+Express
+Mongodb
 
 <!-- Prerequisites -->
 

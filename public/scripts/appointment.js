@@ -72,4 +72,17 @@ $('.button-div div').click(event => {
     window.location.href = `/appointments/?week=${week}`;
 })
 
-$(".container")[0].style.display = "flex";
+$(".list")[0].style.display = "flex";
+
+
+$(".switch").click(event => {
+    if ($(event.target)[0] === $("input[type=checkbox]")[0]) {
+        if (event.target.checked) {
+            $(".list")[0].style.display = "none";
+            $(".schedule")[0].style.display = "flex";
+        }
+    } else {
+        $(".list")[0].style.display = "flex";
+        $(".schedule")[0].style.display = "none";
+    }
+})

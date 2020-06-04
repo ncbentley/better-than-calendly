@@ -2,18 +2,32 @@
 main {
     margin-top: 20px;
     flex: 1 1 auto;
+    flex-direction: column;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative
 
+}
+
+.schedule{
+    display: none;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.list{
+    display: none;
+    flex-direction: column;
 }
 
 li {
     width: 300px;
     border: 2px solid black;
     margin: 25px 0 0 0;
-    display: none;
+    display: flex;
     flex-direction: row;
     position: relative;
 }
@@ -65,24 +79,24 @@ section {
     flex-direction: column;
 }
 
-p {
+.container p {
     background-color: green;
     flex: 1;
     transition-duration: .3s;
 }
 
-p.taken:hover {
+.container p.taken:hover {
     background-color: pink;
     cursor: pointer;
     transform: scale(1.1);
 }
 
-p.label {
+.container p.label {
     background-color: white;
 }
 
-p.label:hover,
-p.unavailable:hover
+.container p.label:hover,
+.container p.unavailable:hover
 {
     transform: scale(1.0);
     cursor: default;
@@ -99,70 +113,8 @@ p.unavailable:hover
     text-align: center;
 }
 
-p.unavailable {
-    background-color: var(--unavailable);
-}
-
 p.taken {
     background-color: var(--taken);
-}
-
-/* The Modal (background) */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    justify-content: center;
-    align-items: center;
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0, 0, 0); /* Fallback color */
-    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-}
-
-/* Modal Content */
-.modal-content {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #fefefe;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-}
-
-/* Center form in modal */
-.modal-content form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.modal-content form input {
-    margin: 6px;
-}
-
-/* The Close Button */
-.close {
-    position: absolute;
-    right: 5px;
-    top: 0;
-    color: #aaaaaa;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
 }
 
 .button-div {
@@ -200,4 +152,81 @@ p.taken {
 
 .button-div div:hover span {
     color: white;
+}
+
+ /* code borrowed from https://stackoverflow.com/a/39948858 */
+.switch {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: inline-block;
+  width: 180px;
+  height: 34px;
+}
+ .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: red;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+.slider:before {
+  position: absolute;
+  content: "aaa";
+  height: 36px;
+  width: 60px;
+  left:0px;
+  bottom: -1px;
+  top: -1px;
+  background-color: black;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+input:checked + .slider {
+  background-color: #2196F3;
+}
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+input:checked + .slider:before {
+  -webkit-transform: translateX(120px);
+  -ms-transform: translateX(120px);
+  transform: translateX(120px);
+}
+.text {
+  color: white;
+}
+.text:after {
+  position: absolute;
+  top: 7px;
+  right: 25px;
+  content: "List";
+  -webkit-transition: opacity 0.5s ease-in-out;
+  -moz-transition: opacity 0.5s ease-in-out;
+  transition: opacity 0.5s ease-in-out;
+}
+.text:before {
+  position: absolute;
+  top: 7px;
+  left: 25px;
+  content: "Schedule";
+  -webkit-transition: opacity 0.5s ease-in-out;
+  -moz-transition: opacity 0.5s ease-in-out;
+  transition: opacity 0.5s ease-in-out;
+}
+input + .slider + .text:after {
+  opacity: 1;
+}
+input + .slider + .text:before {
+  opacity: 0;
+}
+input:checked + .slider + .text:after {
+  opacity: 0;
+}
+input:checked + .slider + .text:before {
+  opacity: 1;
 }

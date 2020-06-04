@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <%- include('../partials/styles') %>
+    <link rel="stylesheet" href="./styles/signin.css">
+</head>
+
+<body>
+    <%- include('../partials/header') %>
+    <main>
+        <h2>Register For An Account</h2>
+        <form action="/register" method="POST">
+            <input type="text" name="username" placeholder="Username" required />
+            <input type="password" name="password" placeholder="Password" required />
+            <input type="password" name="confirm" placeholder="Confirm Password" required />
+            <input type="submit" value="Register" class="hvr-back-pulse" />
+        </form>
+    </main>
+</body>
+
+</html>

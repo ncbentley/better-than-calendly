@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Better Than Calendly</title>
+    <%- include('../partials/styles') %>
+    <link rel="stylesheet" href="/styles/signin.css">
+</head>
+
+<body>
+    <%- include('../partials/header') %>
+    <main>
+        <!-- schedule new -->
+        <form action="/schedules" method="POST">
+            <input type="text" name="companyName" placeholder="Company Name" />
+            <input type="text" name="scheduleName" placeholder="Schedule Title" />
+            <section>
+                Open Time: <input type="time" name="openTime" step=3600 />
+            </section>
+            <section>
+                Close Time: <input type="time" name="closeTime" step=3600 />
+            </section>
+            <input type="submit" value="Create Schedule" class="hvr-back-pulse"/>
+        </form>
+    </main>
+</body>
+
+</html>

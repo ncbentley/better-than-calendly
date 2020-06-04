@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Appointments</title>
+    <%- include('../partials/styles') %>
+    <link rel="stylesheet" href="/styles/signin.css">
+</head>
+
+<body>
+    <%- include('../partials/header') %>
+    <main>
+        <!-- appointment edit -->
+        <!-- .name will likely need to be updated to match models -->
+        <form action="/appointments/<%=appointment._id%>?_method=PUT" method="POST">
+            <section>
+                Name: <input type="text" name="name" value="<%=appointment.name %>" />
+            </section>
+            <section>
+                Message: <input type="text" name="message" value="<%=appointment.message %>" />
+            </section>
+            <input type="submit" value="Update Appointment" />
+        </form>
+    </main>
+</body>
+
+</html>

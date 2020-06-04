@@ -5,11 +5,11 @@ const scheduleSchema = {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
-    openTime: {type: Date, required: true},
-    closeTime: {type: Date, required: true},
+    openTime: {type: Number, required: true},
+    closeTime: {type: Number, required: true},
     companyName: {type: String, required: true},
     scheduleName: {type: String, required: true},
-    customSlots: [Date],
+    customSlots: [Number],
     appointments: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Appointment'

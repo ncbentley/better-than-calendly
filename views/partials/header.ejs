@@ -1,0 +1,29 @@
+<head>
+    <link rel="stylesheet" href="/styles/header.css">
+    <script src="/scripts/header.js" defer></script>
+</head>
+
+<header>
+    <section class="title">
+        <div>
+            <h1>Better than Calendly</h1>
+        </div>
+    </section>
+    <% if (user) {%>
+        <div class="buttons" id="create">
+            <form action='/logout?_method=DELETE' method='POST'><input type='submit' value='Logout'/></form>
+            <a href="/schedules/new"><button>Create a schedule</button></a>
+        </div>
+    <%} else {%>
+        <div class="buttons" id="login">
+            <a href="/login"><button>Sign In</button></a> <a href="/register"><button>Sign Up</button></a>
+        </div>
+    <%}%>
+    <nav>
+        <ul>
+            <li><a href="/schedules/all">View All Schedules</a></li>
+            <li><a href="/schedules">View My Schedules</a></li>
+            <li><a href="/appointments">View My Appointments</a></li>
+        </ul>
+    </nav>
+</header>

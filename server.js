@@ -22,7 +22,7 @@ app.use(methodOverride('_method'));
 app.use(
     session({
         store: new MongoStore({
-            url: process.env.DB_URL
+            url: process.env.MONGODB_URI
         }),
         secret: "This is my fancy secret",
         resave: false,
